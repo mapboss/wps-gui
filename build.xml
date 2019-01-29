@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="wpsbuilder">
+    <property file="build.properties" />
     <property name="build" location="build"/>
     <target name="copy">
         <copy file="index.html" todir="${build}/${ant.project.name}"/>
@@ -13,23 +14,25 @@
         <copy todir="${build}/${ant.project.name}/vendor">
             <fileset dir="vendor"/>
         </copy>
+        <replace file="${build}/${ant.project.name}/index.html" token="{{WPS_URL}}" value="${WPS_URL}" />
     </target>
     <target name="npm">
-      <exec executable="npm">
-        <arg line="install"/>
-      </exec>
+        <exec executable="npm">
+            <arg line="install"/>
+        </exec>
     </target>
     <target name="bower">
-      <mkdir dir="components"/>
-      <exec executable="bower">
-        <arg line="install"/>
-      </exec>
+        <mkdir dir="components"/>
+        <exec executable="bower">
+            <arg line="--allow-root"/>
+            <arg line="install"/>
+        </exec>
     </target>
     <target name="gulp">
-      <mkdir dir="vendor"/>
-      <mkdir dir="dist"/>
-      <exec executable="gulp">
-      </exec>
+        <mkdir dir="vendor"/>
+        <mkdir dir="dist"/>
+        <exec executable="gulp">
+        </exec>
     </target>
     <target name="war" depends="npm,bower,gulp,copy">
         <war needxmlfile="false" destfile="${build}/${ant.project.name}.war">

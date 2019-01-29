@@ -1,0 +1,17 @@
+dist
+src
+node_modules
+LICENSE
+*.md
+.vscode
+.gitattributes
+.gitignore
+.gitlab-ci.yml
+.editorconfig
+.eslintignore
+.eslintrc.js
+docker-compose.yml
+Dockerfile
+build.sh
+jsconfig.json
+tsconfig.json
